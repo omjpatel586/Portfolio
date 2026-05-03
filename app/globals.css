@@ -1,0 +1,41 @@
+@config "../tailwind.config.ts";
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #f47c20 #111111;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, rgba(244, 124, 32, 0.18), transparent 28%),
+    linear-gradient(180deg, #050505 0%, #000000 45%, #070707 100%);
+  /* color: #ffffff; */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f47c20;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d96a10;
+}
+
+@keyframes gadaSpin {
+  0% {
+    transform: rotate(0deg) translateY(-24px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateY(-24px) rotate(-360deg);
+  }
+}

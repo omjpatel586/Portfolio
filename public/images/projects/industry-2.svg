@@ -1,0 +1,13 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#0A0A0A"/>
+  <path d="M0 540C180 460 312 430 458 454C639 484 730 604 945 592C1085 584 1198 530 1280 480V720H0V540Z" fill="#F47C20" fill-opacity="0.14"/>
+  <rect x="120" y="110" width="1040" height="500" rx="30" fill="#111111" stroke="#F47C20" stroke-opacity="0.32" stroke-width="2"/>
+  <rect x="190" y="185" width="900" height="34" rx="17" fill="#F47C20"/>
+  <rect x="190" y="260" width="610" height="20" rx="10" fill="white" fill-opacity="0.84"/>
+  <rect x="190" y="304" width="700" height="20" rx="10" fill="white" fill-opacity="0.66"/>
+  <rect x="190" y="348" width="540" height="20" rx="10" fill="white" fill-opacity="0.48"/>
+  <rect x="190" y="420" width="280" height="120" rx="22" fill="#181818"/>
+  <rect x="500" y="420" width="280" height="120" rx="22" fill="#181818"/>
+  <rect x="810" y="420" width="280" height="120" rx="22" fill="#181818"/>
+  <text x="640" y="585" fill="white" font-size="40" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">Service Console</text>
+</svg>
