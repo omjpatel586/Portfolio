@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Om J Patel | Software Developer",
+    default: "Om J Patel | Software Engineer",
     template: "%s | Om J Patel",
   },
   description: "Node.js, NestJS, AI agents, and full-stack product engineering.",
