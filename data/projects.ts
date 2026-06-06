@@ -37,9 +37,9 @@ export const selfProjects: ProjectItem[] = [
       `A powerful, user-friendly platform designed for modern businesses. From invoices to e-way bills, product catalogs to vendor lists, everything is organized in one seamless dashboard — helping you build professionalism, maintain compliance, and scale your brand effortlessly.
 
 Whether you're handling a single business or managing multiple companies, Invoicely offers the flexibility and control you need — without the complexity.`,
-    url: 'https://drive.google.com/file/d/1nCPYO9rYtAUWb8Cdg-71UOOqhQLqCm0k/view?usp=sharing',
+    url: 'https://useinvoicely.cloud',
     photo: '/images/projects/project-3.png',
-    stack: ['Python', 'Tkinter Library In Python', 'PostgresSQL', 'Nest.js', 'Next.js', 'Typescript']
+    stack: ['Python', 'Tkinter Library In Python', 'MongoDB', 'Nest.js', 'Next.js', 'Typescript']
   },
 ];
 
