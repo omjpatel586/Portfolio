@@ -1,16 +1,34 @@
 "use client";
 
 import { useState } from "react";
+import { sendContactForm } from "../utils/contact-us";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit() {
+    if (!formData.name || !formData.email || !formData.message) {
+      alert("Please fill in all fields.");
+      return;
+    }
     setStatus("sending");
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    await sendContactForm({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    });
+    alert("Message sent! I'll get back to you soon.");
     setStatus("sent");
-    event.currentTarget.reset();
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
   }
 
   return (
@@ -35,13 +53,12 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <form
-            className="grid gap-4 rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6"
-            onSubmit={handleSubmit}
-          >
+          <form className="grid gap-4 rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6">
             <input
               name="name"
               placeholder="Your Name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
               className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
             />
@@ -49,19 +66,24 @@ export default function ContactPage() {
               name="email"
               type="email"
               placeholder="Your Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
               className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
             />
             <textarea
               name="message"
               placeholder="Your Message"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               required
               className="min-h-40 w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
             />
             <button
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-ink transition hover:-translate-y-0.5"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-ink transition hover:-translate-y-0.5 cursor-pointer"
               type="submit"
               disabled={status === "sending"}
+              onClick={() => handleSubmit()}
             >
               {status === "sending" ? "Sending..." : "Send Message"}
             </button>
