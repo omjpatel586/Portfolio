@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CONTACT_INFO } from "@/data/contact-info";
 import { sendContactForm } from "../utils/contact-us";
 
 export default function ContactPage() {
@@ -40,16 +41,118 @@ export default function ContactPage() {
             Start a useful conversation.
           </h2>
           <p className="max-w-[42rem] text-base leading-7 text-brand-light/85">
-            This submission flow is a placeholder until the real email or Formspree endpoint is
-            added.
+            Have a project in mind or a role to discuss? Send a message and I’ll get back to you.
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6">
-            <h3 className="text-xl font-semibold text-brand">Surat, India</h3>
-            <p className="mt-3 leading-7 text-brand-light/85">
-              Available for software engineering, AI agent integration, and product delivery work.
+          <div className="flex flex-col gap-5 rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6">
+            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-brand/40 bg-brand/10 px-3 py-1 text-xs font-medium text-brand-soft">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Available for new projects
+            </span>
+
+            <div>
+              <h3 className="text-xl font-semibold text-brand">Let’s build something</h3>
+              <p className="mt-2 leading-7 text-brand-light/85">
+                Available for software engineering, AI agent integration, and product delivery work.
+              </p>
+            </div>
+
+            <ul className="grid gap-2.5">
+              {[
+                "Backend & API development — Node.js, NestJS, Python, FastAPI, Django, Flask",
+                "AI agent integration & workflow automation",
+                "End-to-end product delivery",
+                "Any projects that require a full-stack engineer with a focus on AI and automation",
+              ].map((service) => (
+                <li
+                  key={service}
+                  className="flex items-start gap-3 text-sm leading-6 text-brand-light/85"
+                >
+                  <i className="fas fa-check mt-1 text-brand" />
+                  {service}
+                </li>
+              ))}
+            </ul>
+
+            <div className="h-px bg-brand/20" />
+
+            <ul className="grid gap-3 text-sm">
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={`mailto:${CONTACT_INFO.email}`}
+                >
+                  <i className="fas fa-envelope w-5 text-center text-brand" />
+                  {CONTACT_INFO.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={`tel:${CONTACT_INFO.phone.replace(/[^+\d]/g, "")}`}
+                >
+                  <i className="fas fa-phone w-5 text-center text-brand" />
+                  {CONTACT_INFO.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={CONTACT_INFO.socialMedia.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-linkedin-in w-5 text-center text-brand" />
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={CONTACT_INFO.socialMedia.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-github w-5 text-center text-brand" />
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={CONTACT_INFO.socialMedia.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-x-twitter w-5 text-center text-brand" />
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
+                  href={CONTACT_INFO.socialMedia.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-facebook w-5 text-center text-brand" />
+                  Facebook
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-brand-light/85">
+                <i className="fas fa-location-dot w-5 text-center text-brand" />
+                {CONTACT_INFO.location}
+              </li>
+            </ul>
+
+            <p className="text-xs text-brand-light/60">
+              <i className="fas fa-clock mr-1.5" />
+              Typically responds within 24 hours.
             </p>
           </div>
 
@@ -89,7 +192,7 @@ export default function ContactPage() {
             </button>
             {status === "sent" ? (
               <p className="text-sm text-brand-light/80">
-                Message captured. Wire this form to your live endpoint.
+                Thanks — your message has been sent. I’ll get back to you soon.
               </p>
             ) : null}
           </form>
