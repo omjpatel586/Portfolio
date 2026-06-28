@@ -2,43 +2,31 @@
 import { About } from "@/components/About";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
-// import { HanumanCanvas } from "@/components/HanumanCanvas";
 import { Headlines } from "@/components/Headlines";
 import { Project } from "@/components/Project";
 import { SectionBreak } from "@/components/SectionBreak";
+import { Skills } from "@/components/Skills";
 
 export default function HomePage() {
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-100">
-  //       <GadaSpinner />
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       <section className="relative min-h-screen overflow-hidden">
-        {/* <HanumanCanvas /> */}
-        <div className="relative z-30 flex min-h-screen items-center">
+        {/* Vignette keeps the centered hero text readable over the night background */}
+        <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,rgba(5,5,5,0.6),transparent_72%)]" />
+        <div className="relative z-30 flex min-h-screen items-center justify-center">
           <Headlines />
         </div>
       </section>
       <SectionBreak />
       <About />
+      <SectionBreak />
+      <Skills />
+      <SectionBreak />
+      <Experience />
+      <SectionBreak />
       <Project mode="self" />
       <SectionBreak />
       <Project mode="industry" />
-      <SectionBreak />
-      <Experience />
       <SectionBreak />
       <Education />
     </>

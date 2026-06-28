@@ -1,4 +1,5 @@
 import { educationItems, IEducationItem, IMediaItem } from "@/data/education";
+import Image from "next/image";
 import Link from "next/link";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -16,7 +17,13 @@ function MediaCard({ item }: { item: IMediaItem }) {
         {/* Thumbnail */}
         <div className="relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden bg-brand/20">
           {item.thumbnail ? (
-            <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover" />
+            <Image
+              src={item.thumbnail.startsWith("/") ? item.thumbnail : `/${item.thumbnail}`}
+              alt={item.title}
+              fill
+              sizes="64px"
+              className="object-cover"
+            />
           ) : (
             /* Fallback gradient placeholder matching LinkedIn photo style */
             <div className="w-full h-full bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 flex items-center justify-center">
@@ -60,7 +67,22 @@ function EducationCard({ item }: { item: IEducationItem }) {
       <div className="text-xs uppercase tracking-[0.12em] text-brand">{item.date}</div>
       <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
       <p className="mt-1 text-brand-light">{item.school}</p>
-      <p className="mt-2 leading-7 text-brand-light/85">{item.description}</p>
+      {item.description && (
+        <p className="mt-3 leading-7 text-brand-light/85">{item.description}</p>
+      )}
+
+      {item.highlights && item.highlights.length > 0 && (
+        <ul className="mt-4 grid gap-3">
+          {item.highlights.map((highlight) => (
+            <li key={highlight} className="flex gap-3">
+              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+              <span className="leading-7 text-brand-light/85">{highlight}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {item.outro && <p className="mt-4 leading-7 text-brand-light/75">{item.outro}</p>}
 
       {/* Skills pill */}
       {item.skills && item.skills.length > 0 && (

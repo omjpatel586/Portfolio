@@ -1,64 +1,151 @@
-export const experienceItems = [
+export interface IExperienceHighlight {
+  title: string;
+  detail: string;
+}
+
+export interface IExperienceItem {
+  id: number;
+  period: string;
+  role: string;
+  company: string;
+  intro: string;
+  highlights?: IExperienceHighlight[];
+  outro?: string;
+  skills: string[];
+}
+
+export const experienceItems: IExperienceItem[] = [
   {
     id: 1,
     period: "Dec 2024 - Present",
-    role: "Software Engineer",
+    role: "Backend & DevOps Engineer",
     company: "Transcodezy IT Solutions Pvt. Ltd.",
-    summary:
-      `Currently working on scalable backend solutions using Node.js, NestJS,
-MongoDB, and AWS within an Nx monorepo architecture. Gained hands-on
-experience with AI agents, message queues for load balancing, DevOps
-practices, and tools such as Puppeteer.
-Worked on key projects.
-12/2024 – Present
-Surat, India
-•AI-based HR interview automation: Designed MongoDB schema, developed
-APIs, and built an AI agent using prompt engineering to automate the
-interview process.
-•Cloud Storage Platform : Developed scalable APIs, implemented
-rate limiting, and optimised MongoDB schema for efficient data handling.
-•Cricket Data Analysis Tool: Enabled file uploads, generated performance
-reports, and applied AI models to analyse cricket data for users.
-•Facebook Automation Suite: Built Node.js scripts using Puppeteer for
-automating posts, likes, reels, and group shares, improving social reach
-automation.
-•Music distribution software: A white label music distribution software that allows artists to distribute their music to various platforms and royalty management.
-Also focused on improving English writing, technical explanation, and spoken
-clarity for better client communication and documentation.`,
-    skills: ["Message Queues", "AI Agents", "NX monolithic architecture", "Puppeteer", "Web Scraping", "English writing & grammer", "Speaking & explanation", "Amazon Web Services (AWS)", "Cloud computing", "Devops", "Payment Gateways", "Video streaming using hls protocol", "Apache kafka", "Cloud storage solutions", "Docker"],
+    intro:
+      "Building scalable backend solutions with Node.js, NestJS, MongoDB, and AWS within an Nx monorepo architecture. Hands-on with AI agents, message queues for load balancing, DevOps practices, and tools such as Puppeteer.",
+    highlights: [
+      {
+        title: "AI-based HR interview automation",
+        detail:
+          "Designed the MongoDB schema, developed the APIs, and built an AI agent using prompt engineering to automate the interview process.",
+      },
+      {
+        title: "Cloud storage platform",
+        detail:
+          "Developed scalable APIs, implemented rate limiting, and optimised the MongoDB schema for efficient data handling.",
+      },
+      {
+        title: "Cricket data analysis tool",
+        detail:
+          "Enabled file uploads, generated performance reports, and applied AI models to analyse cricket data for users.",
+      },
+      {
+        title: "Facebook automation suite",
+        detail:
+          "Built Node.js scripts using Puppeteer to automate posts, likes, reels, and group shares, improving social-reach automation.",
+      },
+      {
+        title: "Music distribution software",
+        detail:
+          "A white-label platform that lets artists distribute their music to various platforms, with royalty management.",
+      },
+    ],
+    outro:
+      "Also focused on improving English writing, technical explanation, and spoken clarity for better client communication and documentation.",
+    skills: [
+      "Message Queues",
+      "AI Agents",
+      "NX monolithic architecture",
+      "Puppeteer",
+      "Web Scraping",
+      "English writing & grammer",
+      "Speaking & explanation",
+      "Amazon Web Services (AWS)",
+      "Cloud computing",
+      "Devops",
+      "Payment Gateways",
+      "Video streaming using hls protocol",
+      "Apache kafka",
+      "Cloud storage solutions",
+      "Docker",
+    ],
   },
   {
     id: 2,
     period: "Sep 2023 - Dec 2024",
-    role: "Software Engineer",
+    role: "Backend Engineer",
     company: "Kmphitech Solutions Pvt. Ltd.",
-    summary:
-      `I applied my Node.js expertise to develop efficient backend solutions, focusing on API performance, scalability, and project timelines. Key projects included:
-
-𝐌𝐮𝐬𝐢𝐜 𝐒𝐭𝐫𝐞𝐚𝐦𝐢𝐧𝐠 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞 (𝐖𝐞𝐛): Built and optimized backend APIs for music data retrieval and user interaction.
-
-𝐐𝐮𝐢𝐜𝐤 𝐌𝐞𝐝𝐢𝐜𝐚𝐥 𝐀𝐩𝐩𝐨𝐢𝐧𝐭𝐦𝐞𝐧𝐭𝐬 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞 (𝐌𝐨𝐛𝐢𝐥𝐞): Designed backend logic for patient appointment schedule with doctor, and notifications.
-
-𝐀𝐜𝐭𝐢𝐯𝐢𝐭𝐲 𝐌𝐚𝐫𝐚𝐭𝐡𝐨𝐧 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞 (𝐌𝐨𝐛𝐢𝐥𝐞): Created secure and scalable APIs for user activity tracking and leaderboard functionalities.
-
-𝐒𝐨𝐜𝐢𝐚𝐥 𝐃𝐚𝐭𝐢𝐧𝐠 𝐀𝐩𝐩 & 𝐁𝐨𝐨𝐤 𝐒𝐞𝐫𝐯𝐢𝐜𝐞 𝐀𝐩𝐩 (𝐎𝐧𝐠𝐨𝐢𝐧𝐠): Engineered backend structures for authentication, user matching, and service management.
-
-This role emphasized my ability to design high-performance systems using Node.js and meet project deadlines effectively.`,
-    skills: ["Unit Testing", "Project Management", "Time Management", "api documentation using postman features"]
+    intro:
+      "Applied my Node.js expertise to build efficient backend solutions, focusing on API performance, scalability, and meeting project timelines. Key projects included:",
+    highlights: [
+      {
+        title: "Music Streaming Software (Web)",
+        detail: "Built and optimised backend APIs for music data retrieval and user interaction.",
+      },
+      {
+        title: "Quick Medical Appointments Software (Mobile)",
+        detail:
+          "Designed the backend logic for patient–doctor appointment scheduling and notifications.",
+      },
+      {
+        title: "Activity Marathon Software (Mobile)",
+        detail: "Created secure, scalable APIs for user activity tracking and leaderboard functionality.",
+      },
+      {
+        title: "Social Dating App & Book Service App (Ongoing)",
+        detail:
+          "Engineered backend structures for authentication, user matching, and service management.",
+      },
+    ],
+    outro:
+      "This role emphasised my ability to design high-performance systems with Node.js and meet project deadlines effectively.",
+    skills: [
+      "Unit Testing",
+      "Project Management",
+      "Time Management",
+      "api documentation using postman features",
+    ],
   },
   {
     id: 3,
     period: "May 2023 - Aug 2023",
-    role: "Software Engineer Intern",
+    role: "Backend Engineer Intern",
     company: "Codexial Technologies Pvt. Ltd.",
-    summary:
-      `I worked on diverse and challenging projects that enriched my technical expertise in TypeScript and NestJS. I played a vital role in designing clean, efficient, and scalable backend solutions. Key projects included:
-
-𝐌𝐨𝐯𝐢𝐞 𝐁𝐨𝐨𝐤𝐢𝐧𝐠 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞: Developed backend APIs for seamless booking functionality and real-time availability updates.
-
-𝐂𝐮𝐬𝐭𝐨𝐦𝐞𝐫 𝐒𝐮𝐩𝐩𝐨𝐫𝐭 𝐓𝐢𝐜𝐤𝐞𝐭𝐢𝐧𝐠 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞: Designed a secure and efficient backend architecture to manage and track support tickets.
-
-This experience reinforced my commitment to delivering high-quality code and successfully completing complex projects.`,
-    skills: ["TypeScript", "NestJS", "Backend Development", "Node.js", "API Development", "Database Design", "Version Control", "gRPC", "Microservices", "Software Unit Testing with jest", "Javascript", "ORM", "MongoDB", "JWT", "Redis", "Socket.IO", "Server API Validations", "Optimization", "Problem solving and debugging", "Express.js"],
+    intro:
+      "Worked on diverse, challenging projects that strengthened my expertise in TypeScript and NestJS, designing clean, efficient, and scalable backend solutions. Key projects included:",
+    highlights: [
+      {
+        title: "Movie Booking Software",
+        detail: "Developed backend APIs for seamless booking and real-time availability updates.",
+      },
+      {
+        title: "Customer Support Ticketing Software",
+        detail:
+          "Designed a secure, efficient backend architecture to manage and track support tickets.",
+      },
+    ],
+    outro:
+      "This experience reinforced my commitment to delivering high-quality code and completing complex projects.",
+    skills: [
+      "TypeScript",
+      "NestJS",
+      "Backend Development",
+      "Node.js",
+      "API Development",
+      "Database Design",
+      "Version Control",
+      "gRPC",
+      "Microservices",
+      "Software Unit Testing with jest",
+      "Javascript",
+      "ORM",
+      "MongoDB",
+      "JWT",
+      "Redis",
+      "Socket.IO",
+      "Server API Validations",
+      "Optimization",
+      "Problem solving and debugging",
+      "Express.js",
+    ],
   },
 ];

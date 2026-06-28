@@ -39,3 +39,87 @@ body {
     transform: rotate(360deg) translateY(-24px) rotate(-360deg);
   }
 }
+
+/* Hero ambient: Hanuman glides bottom-left → off top-right, brief pause, then loops. */
+@keyframes hanumanFlyby {
+  0% {
+    transform: translate(-32vw, 82vh) rotate(-4deg) scale(0.85);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  75% {
+    transform: translate(112vw, -55vh) rotate(3deg) scale(1.05);
+    opacity: 0;
+  }
+  100% {
+    /* Parked off-screen ~2.5s — the gap before the next pass. */
+    transform: translate(112vw, -55vh) rotate(3deg) scale(1.05);
+    opacity: 0;
+  }
+}
+
+/* Night-sky cloud sway and star twinkle. */
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(-6%);
+  }
+  100% {
+    transform: translateX(6%);
+  }
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.night-stars,
+.night-stars-2 {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+}
+
+.night-stars {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 90px 80px, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(1.5px 1.5px at 160px 50px, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 200px 120px, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 130px 160px, rgba(255, 255, 255, 0.75), transparent);
+  background-size: 240px 240px;
+  animation: starTwinkle 4s ease-in-out infinite alternate;
+}
+
+.night-stars-2 {
+  background-image:
+    radial-gradient(1px 1px at 50px 60px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 110px 20px, rgba(255, 214, 170, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 180px 140px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 30px 180px, rgba(255, 255, 255, 0.55), transparent);
+  background-size: 320px 320px;
+  animation: starTwinkle 6s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hanuman-flyby {
+    animation: none;
+    opacity: 0;
+  }
+
+  .animate-cloud-drift,
+  .night-stars,
+  .night-stars-2 {
+    animation: none;
+  }
+}

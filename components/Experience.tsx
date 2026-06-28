@@ -29,7 +29,38 @@ export function Experience({ standalone = false }: ExperienceProps) {
               <div className="text-xs uppercase tracking-[0.12em] text-brand">{item.period}</div>
               <h3 className="mt-2 text-xl font-semibold">{item.role}</h3>
               <p className="mt-1 text-brand-light">{item.company}</p>
-              <p className="mt-2 leading-7 text-brand-light/85">{item.summary}</p>
+              <p className="mt-3 leading-7 text-brand-light/85">{item.intro}</p>
+
+              {item.highlights && item.highlights.length > 0 && (
+                <ul className="mt-4 grid gap-3">
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight.title} className="flex gap-3">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                      <span className="leading-7 text-brand-light/85">
+                        <strong className="font-semibold text-brand-light">
+                          {highlight.title}:
+                        </strong>{" "}
+                        {highlight.detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {item.outro && <p className="mt-4 leading-7 text-brand-light/75">{item.outro}</p>}
+
+              {item.skills && item.skills.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {item.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-0.5 text-xs font-medium text-brand"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              )}
             </article>
           ))}
         </div>

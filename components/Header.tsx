@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CONTACT_INFO } from "@/data/contact-info";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -38,7 +39,7 @@ export function Header() {
     >
       <div className="mx-auto flex min-h-[4.5rem] w-[min(100%-2rem,1180px)] items-center justify-between gap-4">
         <Link href="/" className="flex flex-col gap-1">
-          <strong className="text-base tracking-[0.04em] text-brand">Om J Patel</strong>
+          <strong className="text-base tracking-[0.04em] text-brand">{CONTACT_INFO.name}</strong>
         </Link>
 
         <nav

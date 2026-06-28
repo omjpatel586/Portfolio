@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ReactTyped } from "react-typed";
+import { CONTACT_INFO } from "@/data/contact-info";
 
 export function Headlines() {
   const myHeadlines = [
@@ -13,8 +14,8 @@ export function Headlines() {
   ];
 
   return (
-    <div className="mx-auto grid w-[min(100%-2rem,1180px)] gap-5">
-      <span className="text-xs uppercase tracking-hero text-brand-soft">Surat, India</span>
+    <div className="mx-auto grid w-[min(100%-2rem,1180px)] justify-items-center gap-5 text-center">
+      <span className="text-xs uppercase tracking-hero text-brand-soft">{CONTACT_INFO.location}</span>
       <h1 className="text-[clamp(2rem,4vw,3.5rem)] leading-[0.92] font-semibold text-brand">
         Hi There!
       </h1>
@@ -26,18 +27,26 @@ export function Headlines() {
         Turning backend logic into business magic with AI agents that actually get things done. If
         it’s complex, I simplify it. If it’s manual, I automate it.
       </p>
-      <div className="mt-2 flex flex-wrap gap-4">
+      <div className="mt-2 flex flex-wrap justify-center gap-4">
         <Link
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-ink transition hover:-translate-y-0.5"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand bg-brand/10 px-5 text-sm font-medium text-brand-light transition hover:-translate-y-0.5 hover:bg-brand"
           href="/contact"
         >
           Contact Me
         </Link>
         <Link
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand bg-brand/10 px-5 text-sm font-medium text-brand-light transition hover:-translate-y-0.5"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand bg-brand/10 px-5 text-sm font-medium text-brand-light transition hover:-translate-y-0.5 hover:bg-brand"
           href="/self-projects"
         >
           Explore Projects
+        </Link>
+        <Link
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-brand bg-brand/10 px-5 text-sm font-medium text-brand-light transition hover:-translate-y-0.5 hover:bg-brand"
+          href={CONTACT_INFO.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Download CV
         </Link>
       </div>
     </div>

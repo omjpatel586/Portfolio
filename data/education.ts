@@ -13,6 +13,8 @@ export interface IEducationItem {
   title: string;
   school: string;
   description: string;
+  highlights?: string[];
+  outro?: string;
   skills?: string[];
   media?: IMediaItem[];
 };
@@ -22,7 +24,7 @@ export const educationItems: IEducationItem[] = [
     id: 1,
     title: 'MSC. IT, Computer Science',
     school: 'Saurashtra University',
-    description: `Completed a Master's in Information Technology with a focus on advanced computing concepts, software architecture.`,
+    description: `Completed a Master's in Information Technology with a focus on advanced computing concepts and software architecture.`,
     date: 'June 2024 - April 2026',
     media: [
       {
@@ -38,17 +40,16 @@ export const educationItems: IEducationItem[] = [
     id: 2,
     title: 'BCA, Computer Science',
     school: 'Saurashtra University',
-    description: `Successfully completed my Bachelor of Computer Applications (BCA) with a strong focus on programming, problem-solving, and software development.
-
-Throughout the course, I gained hands-on knowledge in:
-
-▪ Programming Languages: C, C++, C#
-▪ Data Structures & Algorithms: Applied concepts in problem-solving and logic building
-▪ Linux Softwares: Built theoretical understanding of OS concepts and software-level operations
-▪ Final Year Project: Developed an Invoice Generation Software using Python and GUI programming, focusing on practical implementation, user interface design, and data handling
-▪ Academic Excellence: Achieved 1st Rank in Semester 1 and Semester 6
-
-This academic journey significantly strengthened my analytical mindset, coding skills, and software development foundation.`,
+    description: `Completed my Bachelor of Computer Applications (BCA) with a strong focus on programming, problem-solving, and software development. Throughout the course I gained hands-on knowledge in:`,
+    highlights: [
+      'Programming languages: C, C++, and C#.',
+      'Data structures & algorithms — applied to problem-solving and logic building.',
+      'Linux & OS concepts — a solid theoretical understanding of operating systems and software-level operations.',
+      'Final-year project: an Invoice Generation Software built in Python with GUI programming, focused on practical implementation, interface design, and data handling.',
+      'Academic excellence: achieved 1st rank in Semester 1 and Semester 6.',
+    ],
+    outro:
+      'This academic journey significantly strengthened my analytical mindset, coding skills, and software-development foundation.',
     date: 'July 2021 - Mar 2024',
     media: [
       {
@@ -64,15 +65,13 @@ This academic journey significantly strengthened my analytical mindset, coding s
     id: 3,
     title: '1st – 12th Grade | Commerce Stream | 12 Years',
     school: 'JB Diamonds and KARP Impex School ( CBSE Board )',
-    description: `Completed my entire schooling from Grade 1 to 12 under the CBSE curriculum at JB Diamond & Karp Vidya Sankul.
-Built a strong academic foundation through subjects like English, Mathematics, and Science in earlier years.
-In the Commerce stream, I gained comprehensive knowledge in Accounting, Business Studies, and Economics, and also explored Python programming up to a medium proficiency level.
-
-Achievements:
-▪ Scored 74% in 10th Grade (CBSE Board)
-▪ Secured 91% in 12th Grade (Commerce Stream, CBSE Board)
-
-This consistent academic journey helped me develop analytical thinking, communication skills, and a deep interest in business and technology.`,
+    description: `Completed my entire schooling (Grades 1–12) under the CBSE curriculum at JB Diamond & Karp Vidya Sankul. I built a strong academic foundation through English, Mathematics, and Science in the earlier years, then specialised in the Commerce stream — gaining comprehensive knowledge of Accounting, Business Studies, and Economics, while also exploring Python programming to a medium proficiency level.`,
+    highlights: [
+      'Scored 74% in 10th Grade (CBSE Board).',
+      'Secured 91% in 12th Grade (Commerce Stream, CBSE Board).',
+    ],
+    outro:
+      'This consistent academic journey helped me develop analytical thinking, communication skills, and a deep interest in business and technology.',
     date: 'Oct 2009 - July 2021',
     media: [
       {
@@ -88,22 +87,13 @@ This consistent academic journey helped me develop analytical thinking, communic
     id: 4,
     title: 'Full Stack JS Developer Certified',
     school: 'Creative Design & Multimedia Institute',
-    description: `As a dedicated student, I gained comprehensive knowledge of full- stack
-development, mastering technologies like HTML, CSS, JavaScript
-•React.js, PHP, and Node.js
-01/2021 – 03/2024
-Surat, India
-•My passion for coding drove me to complete several hands-on projects
-•This experience solidified my foundation in backend development and sparked
-my interest in advanced technologies like AI
-•Instagram Clone: Replicated essential social media functionalities using
-React.js and Node.js
-•E Commerce App: Integrated backend APIs for product management and order
-processing
-•Blog Application: Developed a PHP backend for dynamic content storage and
-retrieval
-•Hospital Management System: Combined React.js and Node.js to streamline
-hospital workflows, including patient data management.`,
+    description: `Gained comprehensive full-stack development knowledge, mastering technologies like HTML, CSS, JavaScript, React.js, PHP, and Node.js. My passion for coding drove me to complete several hands-on projects that solidified my backend foundation and sparked my interest in advanced technologies like AI.`,
+    highlights: [
+      'Instagram Clone: replicated essential social-media functionality using React.js and Node.js.',
+      'E-commerce App: integrated backend APIs for product management and order processing.',
+      'Blog Application: developed a PHP backend for dynamic content storage and retrieval.',
+      'Hospital Management System: combined React.js and Node.js to streamline hospital workflows, including patient-data management.',
+    ],
     date: 'Jan 2021 - Mar 2024',
     media: [
       {
@@ -119,7 +109,7 @@ hospital workflows, including patient data management.`,
     id: 5,
     title: 'LinkedIn AI Sales Mastery',
     school: 'Meetup',
-    description: ``,
+    description: `A transformative program that sharpened my personal branding, networking, and content-strategy skills, and taught me how to leverage LinkedIn effectively for professional growth.`,
     date: 'Aug 2024 - Oct 2024',
     media: [
       {
