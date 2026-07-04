@@ -6,6 +6,7 @@ import { Headlines } from "@/components/Headlines";
 import { Project } from "@/components/Project";
 import { SectionBreak } from "@/components/SectionBreak";
 import { Skills } from "@/components/Skills";
+import { Testimonials } from "@/components/Testimonials";
 
 export default function HomePage() {
   return (
@@ -21,6 +22,8 @@ export default function HomePage() {
       <About />
       <SectionBreak />
       <Skills />
+      <SectionBreak />
+      <Testimonials />
       <SectionBreak />
       <Experience />
       <SectionBreak />
