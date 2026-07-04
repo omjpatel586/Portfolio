@@ -1,10 +1,50 @@
-import Image from "next/image";
 import { industrialProjects, selfProjects } from "@/data/projects";
+import Image from "next/image";
 
 type ProjectProps = {
   mode: "self" | "industry";
   standalone?: boolean;
 };
+
+type DescriptionBlock = { type: "paragraph"; text: string } | { type: "list"; items: string[] };
+
+function parseDescription(about: string): DescriptionBlock[] {
+  const blocks: DescriptionBlock[] = [];
+  let paragraph: string[] = [];
+  let bullets: string[] = [];
+
+  const flushParagraph = () => {
+    if (paragraph.length) {
+      blocks.push({ type: "paragraph", text: paragraph.join(" ") });
+      paragraph = [];
+    }
+  };
+  const flushList = () => {
+    if (bullets.length) {
+      blocks.push({ type: "list", items: bullets });
+      bullets = [];
+    }
+  };
+
+  for (const raw of about.split("\n")) {
+    const line = raw.trim();
+    if (!line) {
+      flushParagraph();
+      flushList();
+    } else if (/^[•\-*]\s*/.test(line)) {
+      flushParagraph();
+      bullets.push(line.replace(/^[•\-*]\s*/, ""));
+    } else if (bullets.length) {
+      // A wrapped continuation of the previous bullet, not a new one.
+      bullets[bullets.length - 1] += ` ${line}`;
+    } else {
+      paragraph.push(line);
+    }
+  }
+  flushParagraph();
+  flushList();
+  return blocks;
+}
 
 export function Project({ mode, standalone = false }: ProjectProps) {
   const projects = mode === "self" ? selfProjects : industrialProjects;
@@ -42,7 +82,27 @@ export function Project({ mode, standalone = false }: ProjectProps) {
               <div className="grid gap-4 p-5">
                 <div className="text-xs uppercase tracking-[0.12em] text-brand">{project.date}</div>
                 <h3 className="text-xl font-semibold text-brand">{project.name}</h3>
-                <p className="leading-7 text-brand-light/85">{project.about}</p>
+                <div className="grid gap-3">
+                  {parseDescription(project.about).map((block, index) =>
+                    block.type === "paragraph" ? (
+                      <p key={index} className="leading-7 text-brand-light/85">
+                        {block.text}
+                      </p>
+                    ) : (
+                      <ul key={index} className="grid gap-2">
+                        {block.items.map((item, itemIndex) => (
+                          <li
+                            key={itemIndex}
+                            className="flex gap-2.5 leading-7 text-brand-light/85"
+                          >
+                            <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )
+                  )}
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((item) => (
                     <span

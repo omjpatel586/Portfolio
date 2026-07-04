@@ -45,7 +45,7 @@ export function About() {
           <div className="rounded-3xl border border-brand bg-gradient-to-b from-brand/15 to-brand/5 p-4 md:col-span-5">
             <Image
               // src="/images/about/profile-card.svg"
-              src="/images/about/profile-image.png"
+              src="/images/about/profile-image.webp"
               alt="Profile placeholder"
               width={640}
               height={640}

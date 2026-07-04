@@ -40,26 +40,15 @@ body {
   }
 }
 
-/* Hero ambient: Hanuman glides bottom-left → off top-right, brief pause, then loops. */
-@keyframes hanumanFlyby {
+/* Testimonial carousel: each active quote glides in from the right. */
+@keyframes testimonialIn {
   0% {
-    transform: translate(-32vw, 82vh) rotate(-4deg) scale(0.85);
     opacity: 0;
-  }
-  5% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  75% {
-    transform: translate(112vw, -55vh) rotate(3deg) scale(1.05);
-    opacity: 0;
+    transform: translateX(44px);
   }
   100% {
-    /* Parked off-screen ~2.5s — the gap before the next pass. */
-    transform: translate(112vw, -55vh) rotate(3deg) scale(1.05);
-    opacity: 0;
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -112,11 +101,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-hanuman-flyby {
-    animation: none;
-    opacity: 0;
-  }
-
   .animate-cloud-drift,
   .night-stars,
   .night-stars-2 {

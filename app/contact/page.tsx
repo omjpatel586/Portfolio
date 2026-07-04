@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { CONTACT_INFO } from "@/data/contact-info";
+import { useState } from "react";
 import { sendContactForm } from "../utils/contact-us";
 
 export default function ContactPage() {
@@ -156,39 +156,75 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <form className="grid gap-4 rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6">
-            <input
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-              className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              required
-              className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              required
-              className="min-h-40 w-full rounded-2xl border border-brand bg-brand/10 px-4 py-4 text-brand-light outline-none"
-            />
+          <form
+            className="flex flex-col gap-5 self-start rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-6 sm:p-8"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="name"
+                className="text-xs font-medium uppercase tracking-eyebrow text-brand-soft"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+                className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-3 text-brand-light placeholder:text-brand-light/40 outline-none transition focus:border-brand-soft focus:bg-brand/15 focus:ring-2 focus:ring-brand/40"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="email"
+                className="text-xs font-medium uppercase tracking-eyebrow text-brand-soft"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
+                className="w-full rounded-2xl border border-brand bg-brand/10 px-4 py-3 text-brand-light placeholder:text-brand-light/40 outline-none transition focus:border-brand-soft focus:bg-brand/15 focus:ring-2 focus:ring-brand/40"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="message"
+                className="text-xs font-medium uppercase tracking-eyebrow text-brand-soft"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about your project or role…"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                required
+                rows={6}
+                className="min-h-65 w-full resize-y rounded-2xl border border-brand bg-brand/10 px-4 py-3 text-brand-light placeholder:text-brand-light/40 outline-none transition focus:border-brand-soft focus:bg-brand/15 focus:ring-2 focus:ring-brand/40"
+              />
+            </div>
+
             <button
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-5 text-sm font-medium text-ink transition hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-brand px-6 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-brand-soft disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
               type="submit"
               disabled={status === "sending"}
-              onClick={() => handleSubmit()}
             >
-              {status === "sending" ? "Sending..." : "Send Message"}
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
             {status === "sent" ? (
               <p className="text-sm text-brand-light/80">

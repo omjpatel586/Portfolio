@@ -35,8 +35,8 @@ const config: Config = {
       },
       animation: {
         gada: "gadaSpin 2.6s linear infinite",
-        "hanuman-flyby": "hanumanFlyby 10s cubic-bezier(0.33, 0, 0.5, 1) infinite",
         "cloud-drift": "cloudDrift 30s ease-in-out infinite alternate",
+        "testimonial-in": "testimonialIn 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },

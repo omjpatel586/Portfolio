@@ -1,6 +1,7 @@
 export const CONTACT_INFO = {
   name: "Om J Patel",
-  role: "Backend Engineer",
+  role: "Backend & DevOps Engineer",
+  siteUrl: "https://www.omjpatel.dev",
   email: "connect@omjpatel.dev",
   phone: "+91 635-496-6637",
   location: "Surat, India",

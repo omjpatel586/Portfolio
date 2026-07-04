@@ -59,7 +59,15 @@ export const industrialProjects: ProjectItem[] = [
     name: 'BoultBox – 100GB Cloud Storage App',
     date: 'May 2025 - Present',
     about:
-      'Worked on full backend development, MongoDB architecture design, and Docker containerization for seamless microservice deployment. Set up CI/CD pipelines for automated testing and deployment. Also contributed to testing like testers. The platform enables users to securely upload, organize, and access files—similar to Terabox—with a focus on scalability and performance.',
+      `Boult box is a cloud storage platform that offers users 100GB of free storage.
+
+• Architected database schema and RESTful APIs for a cloud storage platform (similar to Google Drive / TeraBox) offering 100GB
+free storage.
+• Integrated Razorpay (web) and Google Play in-app purchases with subscription tracking and payment history.
+• Implemented HLS video streaming, CDN integration, and multipart file upload via AWS SDK pre-signed URLs for large file
+security.
+• Integrated Socket.io for real-time file/payment sync, MaxMind for IP-based pricing localization, and FCM for push notifications.
+• Configured branded email service using EJS templates with AWS SES, and deployed apps to DigitalOcean VPS with CI pipelines.`,
     url: 'https://www.boultbox.com/',
     photo: '/images/projects/industry-project-02.png',
     stack: ['Nest.js', 'MongoDB', 'Next.js', 'Flutter', 'Typescript']
@@ -74,22 +82,20 @@ export const industrialProjects: ProjectItem[] = [
   //   photo: '/images/projects/project-3.png',
   //   stack: ['Nest.js', 'MongoDB', 'Next.js', 'Typescript', 'Monorepo Approach']
   // },
-  // {
-  //   id: 4,
-  //   name: 'Capable Man',
-  //   date: 'Nov 2024 - Dec 2024',
-  //   about:
-  //     'India Blogs Management Software is a clean and modern platform to create, edit, and manage blogs. It includes features like blog status toggling, comment visibility control, likes, and full blog view. Admins can easily moderate content while users can read, like, and comment on blogs with ease.',
-  //   url: 'https://drive.google.com/file/d/1nCPYO9rYtAUWb8Cdg-71UOOqhQLqCm0k/view?usp=sharing',
-  //   photo: '/images/projects/project-3.png',
-  //   stack: ['Node.js', 'Javascript', 'MongoDB', 'React.js', 'Flutter']
-  // },
   {
     id: 3,
     name: 'ASUP Records',
     date: 'Jan 2026 - Present',
     about:
-      'This white-label SaaS solution offers a comprehensive, all-in-one command center where every aspect of the music lifecycle—from metadata management and RouteNote distribution to claims, takedowns, and support—is governed by a granular roles and permissions framework. By centralizing operations into a single dashboard, the platform ensures that admins, labels, and artists interact only with the tools they need, while the backend automates the heavy lifting of financial reconciliation. Once monthly revenue data is uploaded, the software engine precisely calculates splits based on pre- defined commission structures, allowing users to track earnings and initiate withdrawal requests within a secure, transparent, and highly scalable environment.',
+      `ASUP records is a white label music distribution and royalty management platform that serves artists, labels, and digital service providers (DSPs).
+
+• Designed a generalized MongoDB schema for a music distribution & royalty management platform serving artists, labels, and DSPs.
+• Built comprehensive RESTful APIs covering artist catalogs, label management, royalty tracking, finance, support tickets, and
+notifications.
+• Architected the platform as a white-label solution — multiple tenants can operate with their own branding, payment gateway, and
+pricing.
+• Integrated Razorpay and Stripe dynamically per white-label tenant, and deployed with Docker + DigitalOcean VPS + CI pipelines
+* Integrated music distribution with DSPs like Spotify, Apple Music, and YouTube Music for seamless content delivery and royalty tracking.`,
     url: 'https://www.asuprecords.com/',
     photo: '/images/projects/industry-project-3.png',
     stack: ['Node.js', 'Typescript', 'MongoDB', 'Next.js', 'Monorepo Approach']
