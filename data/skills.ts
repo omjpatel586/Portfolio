@@ -1,33 +1,35 @@
+import type { IconName } from "@/components/Icon";
+
 export interface ISkillCategory {
   title: string;
-  icon: string; // Font Awesome class
+  icon: IconName;
   skills: string[];
 }
 
 export const skillCategories: ISkillCategory[] = [
   {
     title: "Languages",
-    icon: "fas fa-code",
+    icon: "code",
     skills: ["TypeScript", "JavaScript", "Python", "C", "C++"],
   },
   {
     title: "Frameworks",
-    icon: "fas fa-layer-group",
+    icon: "layer-group",
     skills: ["Node.js", "NestJS", "NX Monorepo", "React.js", "Next.js"],
   },
   {
     title: "Databases",
-    icon: "fas fa-database",
+    icon: "database",
     skills: ["PostgreSQL", "MySQL", "MongoDB (NoSQL)", "Redis"],
   },
   {
     title: "AI Integrations",
-    icon: "fas fa-robot",
+    icon: "robot",
     skills: ["OpenAI SDK", "Prompt Engineering", "Vector Databases", "LLM Integration"],
   },
   {
     title: "Tools",
-    icon: "fas fa-screwdriver-wrench",
+    icon: "screwdriver-wrench",
     skills: [
       "Socket.io",
       "REST APIs",
@@ -41,37 +43,37 @@ export const skillCategories: ISkillCategory[] = [
   },
   {
     title: "Cloud & DevOps",
-    icon: "fas fa-cloud",
+    icon: "cloud",
     skills: ["Git", "CI/CD", "Docker"],
   },
   {
     title: "Auth & Security",
-    icon: "fas fa-shield-halved",
+    icon: "shield-halved",
     skills: ["JWT", "OAuth 2.0", "Session Management", "Role-Based Access Control (RBAC)"],
   },
   {
     title: "Testing",
-    icon: "fas fa-vial",
+    icon: "vial",
     skills: ["Jest", "Chai", "Mocha"],
   },
   {
     title: "Frontend",
-    icon: "fas fa-palette",
+    icon: "palette",
     skills: ["HTML", "CSS", "Bootstrap", "jQuery", "TailwindCSS"],
   },
   {
     title: "Core Concepts",
-    icon: "fas fa-cubes",
+    icon: "cubes",
     skills: ["OOP", "DSA", "AI Agents", "Microservices Architecture"],
   },
   {
     title: "Methodologies",
-    icon: "fas fa-diagram-project",
+    icon: "diagram-project",
     skills: ["Agile"],
   },
   {
     title: "Consistency & Learning",
-    icon: "fas fa-graduation-cap",
+    icon: "graduation-cap",
     skills: ["Problem Solving (TS & Python + DSA)", "Machine Learning (Python)"],
   },
 ];

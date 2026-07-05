@@ -1,3 +1,4 @@
+import { Icon } from "@/components/Icon";
 import { skillCategories } from "@/data/skills";
 
 type SkillsProps = {
@@ -28,7 +29,7 @@ export function Skills({ standalone = false }: SkillsProps) {
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-brand/30 bg-brand/10 text-brand">
-                  <i className={category.icon} />
+                  <Icon name={category.icon} />
                 </span>
                 <h3 className="text-base font-semibold text-brand">{category.title}</h3>
               </div>

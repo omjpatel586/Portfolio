@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CONTACT_INFO } from "@/data/contact-info";
+import { Icon } from "@/components/Icon";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -69,7 +70,7 @@ export function Header() {
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
         >
-          <i className={`fas ${menuOpen ? "fa-times" : "fa-bars"}`} />
+          <Icon name={menuOpen ? "xmark" : "bars"} />
         </button>
       </div>
     </header>

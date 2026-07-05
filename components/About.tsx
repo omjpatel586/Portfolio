@@ -46,9 +46,10 @@ export function About() {
             <Image
               // src="/images/about/profile-card.svg"
               src="/images/about/profile-image.webp"
-              alt="Profile placeholder"
+              alt="Om J Patel — Backend & DevOps Engineer"
               width={640}
               height={640}
+              sizes="(max-width: 768px) 100vw, 440px"
               className="h-auto w-full rounded-2xl"
             />
           </div>

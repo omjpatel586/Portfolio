@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@/components/Icon";
 import { CONTACT_INFO } from "@/data/contact-info";
 import { useState } from "react";
 import { sendContactForm } from "../utils/contact-us";
@@ -73,7 +74,7 @@ export default function ContactPage() {
                   key={service}
                   className="flex items-start gap-3 text-sm leading-6 text-brand-light/85"
                 >
-                  <i className="fas fa-check mt-1 text-brand" />
+                  <Icon name="check" className="mt-1 shrink-0 text-brand" />
                   {service}
                 </li>
               ))}
@@ -87,7 +88,7 @@ export default function ContactPage() {
                   className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
                   href={`mailto:${CONTACT_INFO.email}`}
                 >
-                  <i className="fas fa-envelope w-5 text-center text-brand" />
+                  <Icon name="envelope" className="w-5 shrink-0 text-brand" />
                   {CONTACT_INFO.email}
                 </a>
               </li>
@@ -96,7 +97,7 @@ export default function ContactPage() {
                   className="flex items-center gap-3 text-brand-light/85 transition hover:text-brand"
                   href={`tel:${CONTACT_INFO.phone.replace(/[^+\d]/g, "")}`}
                 >
-                  <i className="fas fa-phone w-5 text-center text-brand" />
+                  <Icon name="phone" className="w-5 shrink-0 text-brand" />
                   {CONTACT_INFO.phone}
                 </a>
               </li>
@@ -107,7 +108,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fab fa-linkedin-in w-5 text-center text-brand" />
+                  <Icon name="linkedin-in" className="w-5 shrink-0 text-brand" />
                   LinkedIn
                 </a>
               </li>
@@ -118,7 +119,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fab fa-github w-5 text-center text-brand" />
+                  <Icon name="github" className="w-5 shrink-0 text-brand" />
                   GitHub
                 </a>
               </li>
@@ -129,7 +130,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fab fa-x-twitter w-5 text-center text-brand" />
+                  <Icon name="x-twitter" className="w-5 shrink-0 text-brand" />
                   Twitter
                 </a>
               </li>
@@ -140,18 +141,18 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fab fa-facebook w-5 text-center text-brand" />
+                  <Icon name="facebook" className="w-5 shrink-0 text-brand" />
                   Facebook
                 </a>
               </li>
               <li className="flex items-center gap-3 text-brand-light/85">
-                <i className="fas fa-location-dot w-5 text-center text-brand" />
+                <Icon name="location-dot" className="w-5 shrink-0 text-brand" />
                 {CONTACT_INFO.location}
               </li>
             </ul>
 
             <p className="text-xs text-brand-light/60">
-              <i className="fas fa-clock mr-1.5" />
+              <Icon name="clock" className="mr-1.5" />
               Typically responds within 24 hours.
             </p>
           </div>
