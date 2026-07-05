@@ -195,6 +195,7 @@ export function HanumanFlyby() {
               alt=""
               width={1024}
               height={1536}
+              quality={50}
               sizes="(max-width: 768px) 24vw, 360px"
               className="h-auto w-full"
               style={{

@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@/components/Icon";
 import { testimonials } from "@/data/testimonials";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -69,9 +70,9 @@ export function Testimonials() {
           aria-label="Testimonials"
         >
           <article className="relative overflow-hidden rounded-3xl border border-brand bg-gradient-to-b from-brand/12 to-brand/5 p-8 sm:p-10">
-            <i
-              className="fas fa-quote-right pointer-events-none absolute right-8 top-6 text-5xl text-brand/15 sm:text-6xl"
-              aria-hidden="true"
+            <Icon
+              name="quote-right"
+              className="pointer-events-none absolute right-8 top-6 h-12 w-12 text-brand/15 sm:h-14 sm:w-14"
             />
 
             {/* key re-mounts the content so the slide-in replays on every change */}
@@ -120,10 +121,14 @@ export function Testimonials() {
                   aria-selected={index === active}
                   aria-label={`Show testimonial from ${testimonial.name}`}
                   onClick={() => setActive(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === active ? "w-6 bg-brand" : "w-2 bg-brand/30 hover:bg-brand/60"
-                  }`}
-                />
+                  className="group flex h-6 min-w-6 items-center justify-center"
+                >
+                  <span
+                    className={`h-2 rounded-full transition-all ${
+                      index === active ? "w-6 bg-brand" : "w-2 bg-brand/30 group-hover:bg-brand/60"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 
@@ -137,7 +142,7 @@ export function Testimonials() {
                 aria-label="Previous testimonial"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand bg-brand/10 text-brand-light transition hover:bg-brand hover:text-ink"
               >
-                <i className="fas fa-arrow-left" aria-hidden="true" />
+                <Icon name="arrow-left" />
               </button>
               <button
                 type="button"
@@ -145,7 +150,7 @@ export function Testimonials() {
                 aria-label="Next testimonial"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand bg-brand/10 text-brand-light transition hover:bg-brand hover:text-ink"
               >
-                <i className="fas fa-arrow-right" aria-hidden="true" />
+                <Icon name="arrow-right" />
               </button>
             </div>
           </div>
