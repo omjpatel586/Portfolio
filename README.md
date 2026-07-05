@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Om J Patel — Portfolio
+
+Personal portfolio of **Om J Patel**, Backend & DevOps Engineer.
+
+**Live site:** [www.omjpatel.dev](https://www.omjpatel.dev)
+
+A single-page portfolio with a night-sky hero, an animated Hanuman flyby rendered with pose-based sprite animation, an auto-sliding testimonials carousel, and dedicated routes for projects, experience, education, and contact.
+
+## Tech Stack
+
+- [Next.js 16](https://nextjs.org) (App Router) + React 19
+- TypeScript
+- Tailwind CSS v4 (design tokens centralized in `tailwind.config.ts`)
+- Package manager: **pnpm**
+
+## Features
+
+- **Data-driven content** — all resume-style content (projects, experience, education, skills, testimonials) lives in typed arrays under `data/`. Components only render; to update content, edit `data/*.ts` — no JSX changes needed.
+- **Shared section components** — the homepage stacks the same components (`Headlines`, `About`, `Skills`, `Testimonials`, `Project`, `Experience`, `Education`) that the standalone routes reuse, so every section stays consistent in both places.
+- **Animated hero** — a requestAnimationFrame flight controller moves six Hanuman poses along bezier arcs with cross-fades, with a `prefers-reduced-motion` fallback.
+- **Testimonials slider** — auto-advancing carousel that adapts type size to message length, pausable on hover/focus, fully keyboard-accessible.
+- **Contact form** — posts JSON to an AWS Lambda function URL (serverless; no backend in this repo).
+- **SEO** — `sitemap.xml` and `robots.txt` via Next metadata routes, JSON-LD Person schema, Open Graph/Twitter cards, canonical URLs.
+- **Performance** — self-hosted inline SVG icons (no third-party CSS/fonts/cookies), inlined critical CSS, tuned image caching and quality. Lighthouse: 100 Accessibility, 100 Best Practices, 100 SEO.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# install dependencies
+pnpm install
+
+# run the dev server → http://localhost:3000
 pnpm dev
-# or
-bun dev
+
+# run the production server
+pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a `.env.local` in the repo root for the contact form:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+NEXT_PUBLIC_AWS_LAMBDA_FUNCTION_URL=<your Lambda function URL>
+```
 
-## Learn More
+Without it the site runs fine, but contact form submissions have nowhere to go.
 
-To learn more about Next.js, take a look at the following resources:
+### Other commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm build   # production build (also runs type checking)
+pnpm start   # serve the production build
+pnpm lint    # ESLint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+app/            routes, layout shell, metadata, sitemap/robots
+  contact/      contact page + form
+  ...           self-projects, industry-projects, education, experience
+components/     section components shared by homepage and routes
+data/           typed content arrays — edit these to change site content
+public/         images, resume PDF, favicon
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Path alias: `@/*` maps to the repo root (e.g. `@/components/...`, `@/data/...`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Content and design © Om J Patel. Icon shapes are from [Font Awesome Free](https://fontawesome.com/license/free) (CC BY 4.0), self-hosted as inline SVG.
