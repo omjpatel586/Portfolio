@@ -6,7 +6,7 @@ import { CONTACT_INFO } from "@/data/contact-info";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const ABOUT_ME_DESCRIPTION = `${CONTACT_INFO.name} is a skilled Senior Backend & DevOps Engineer with expertise in building robust and scalable softwares. With a passion for technology and problem-solving, Om has contributed to various projects, demonstrating proficiency in backend development, database management, and API design, AI development. Connect with Om to explore innovative solutions and collaborate on exciting ventures and new opportunities.`;
+const ABOUT_ME_DESCRIPTION = `${CONTACT_INFO.name} is a skilled Senior Backend & DevOps Engineer and Node.js AI agent backend engineer with expertise in building robust and scalable software using NestJS, NX monorepos, and MongoDB. With a passion for technology and problem-solving, Om has contributed to various projects, demonstrating proficiency in backend development, database management, API design, and AI agent integration. Connect with Om to explore innovative solutions and collaborate on exciting ventures and new opportunities.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(CONTACT_INFO.siteUrl),
@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     apple: "/favicon.webp",
   },
   keywords: [
+    "backend engineer",
+    "software engineer",
+    "backend developer",
+    "software developer",
     "Om J Patel",
     "Om Patel",
     "Om Jayeshbhai Patel",
@@ -36,6 +40,10 @@ export const metadata: Metadata = {
     "NestJS developer India",
     "AI agent integration engineer",
     "AI developer India",
+    "Node.js AI agent backend engineer",
+    "Node.js AI agent backend engineer Surat",
+    "NestJS NX monorepo backend engineer",
+    "Om Patel AI engineer",
   ],
   authors: [{ name: CONTACT_INFO.name, url: CONTACT_INFO.socialMedia.linkedin }],
   creator: CONTACT_INFO.name,
