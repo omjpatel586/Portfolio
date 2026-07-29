@@ -55,10 +55,10 @@ body {
 /* Night-sky cloud sway and star twinkle. */
 @keyframes cloudDrift {
   0% {
-    transform: translateX(-6%);
+    transform: translateX(-12%);
   }
   100% {
-    transform: translateX(6%);
+    transform: translateX(14%);
   }
 }
 

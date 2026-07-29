@@ -3,102 +3,31 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-const HOME = "/images/home";
+// Background-removed, size-normalised cutouts (transparent 1200×1200, figure
+// centred at a consistent scale) so poses cross-fade with no box, no size jump.
+// Generated from the original poses; see public/images/home/flyby/.
+const FLYBY = "/images/home/flyby";
+const POSE_DOWN = `${FLYBY}/down.png`;
+const POSE_STRAIGHT = `${FLYBY}/straight.png`;
+const POSE_UP = `${FLYBY}/up.png`;
 
-type Segment = {
-  src: string;
-  x0: number;
-  y0: number;
-  cx: number;
-  cy: number;
-  x1: number;
-  y1: number;
-  dur: number; // milliseconds
-};
+const X_START = -0.25; // off the left edge
+const X_END = 1.25; // off the right edge
+const Y_START = 0.22; // enters high on the left
+const Y_END = 0.22; // exits high on the right
+const CY = 1.05; // control point low — swoops DOWN through the centre (a valley)
+const CX = (X_START + X_END) / 2; // control point x — mid-flight
+const DURATION = 9000; // one full pass (ms)
 
-// Ground line, cruising altitude — kept as fractions so it scales to any screen.
-const Y_GROUND = 0.92;
-const Y_CRUISE = 0.36;
-const CLIMB = 3800;
-const CRUISE = 5200;
-const DIVE = 3400;
-
-const SEGMENTS: Segment[] = [
-  // Leg 1 — left → right: take off, level out, dive to the right horizon.
-  {
-    src: `${HOME}/hanuman-phose-upward-flying-to-right.png`,
-    x0: -0.18,
-    y0: 0.82,
-    cx: 0.02,
-    cy: 0.5,
-    x1: 0.32,
-    y1: Y_CRUISE,
-    dur: CLIMB,
-  },
-  {
-    src: `${HOME}/hanuman-phose-straight-flying-to-right.png`,
-    x0: 0.32,
-    y0: Y_CRUISE,
-    cx: 0.5,
-    cy: 0.28,
-    x1: 0.68,
-    y1: 0.38,
-    dur: CRUISE,
-  },
-  {
-    src: `${HOME}/hanuman-phose-downward-coming-from-left-to-ground.png`,
-    x0: 0.68,
-    y0: 0.38,
-    cx: 0.92,
-    cy: 0.62,
-    x1: 1.18,
-    y1: Y_GROUND,
-    dur: DIVE,
-  },
-  // Leg 2 — right → left: mirror of the above.
-  {
-    src: `${HOME}/hanuman-phose-upward-flying-to-left.png`,
-    x0: 1.18,
-    y0: 0.82,
-    cx: 0.98,
-    cy: 0.5,
-    x1: 0.68,
-    y1: Y_CRUISE,
-    dur: CLIMB,
-  },
-  {
-    src: `${HOME}/hanuman-phose-straight-flying-to-left.png`,
-    x0: 0.68,
-    y0: Y_CRUISE,
-    cx: 0.5,
-    cy: 0.28,
-    x1: 0.32,
-    y1: 0.38,
-    dur: CRUISE,
-  },
-  {
-    src: `${HOME}/hanuman-phose-downward-coming-from-right-to-ground.png`,
-    x0: 0.32,
-    y0: 0.38,
-    cx: 0.08,
-    cy: 0.62,
-    x1: -0.18,
-    y1: Y_GROUND,
-    dur: DIVE,
-  },
-];
-
-// Precompute each segment's [start, end] on the shared timeline.
-const TIMED = SEGMENTS.reduce<{ start: number; end: number }[]>((acc, seg) => {
-  const start = acc.length ? acc[acc.length - 1].end : 0;
-  acc.push({ start, end: start + seg.dur });
-  return acc;
-}, []);
-const TOTAL = TIMED[TIMED.length - 1].end;
-const FADE = 260; // cross-fade half-window between poses (ms)
+const T1 = 0.33;
+const T2 = 0.67;
+const HALF = 0.12;
 
 const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n);
-const smooth = (n: number) => n * n * (3 - 2 * n); // smoothstep
+const smooth = (n: number) => n * n * (3 - 2 * n); // smoothstep — eases the cross-fade
+// A 0→1 ramp centred on `mid`, smooth across ± HALF.
+const ramp = (p: number, mid: number) => smooth(clamp01((p - (mid - HALF)) / (2 * HALF)));
+// Quadratic bézier: gives the single continuous arc.
 const bezier = (p: number, a: number, c: number, b: number) => {
   const q = 1 - p;
   return q * q * a + 2 * q * p * c + p * p * b;
@@ -106,7 +35,9 @@ const bezier = (p: number, a: number, c: number, b: number) => {
 
 export function HanumanFlyby() {
   const spriteRef = useRef<HTMLDivElement>(null);
-  const poseRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const downRef = useRef<HTMLDivElement>(null);
+  const straightRef = useRef<HTMLDivElement>(null);
+  const upRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const sprite = spriteRef.current;
@@ -120,14 +51,14 @@ export function HanumanFlyby() {
     };
     window.addEventListener("resize", onResize);
 
-    // Reduced motion: one calm static pose, no loop.
+    // Reduced motion: one calm static pose (ascending) near the right, no loop.
     if (reduce) {
-      sprite.style.transform = `translate3d(${0.62 * dims.w}px, ${
-        0.4 * dims.h
+      sprite.style.transform = `translate3d(${0.7 * dims.w}px, ${
+        0.32 * dims.h
       }px, 0) translate(-50%, -50%)`;
-      poseRefs.current.forEach((el, i) => {
-        if (el) el.style.opacity = i === 1 ? "1" : "0";
-      });
+      if (downRef.current) downRef.current.style.opacity = "0";
+      if (straightRef.current) straightRef.current.style.opacity = "0";
+      if (upRef.current) upRef.current.style.opacity = "1";
       return () => window.removeEventListener("resize", onResize);
     }
 
@@ -136,35 +67,24 @@ export function HanumanFlyby() {
 
     const frame = (ts: number) => {
       if (!startTs) startTs = ts;
-      const t = (ts - startTs) % TOTAL;
+      const p = ((ts - startTs) % DURATION) / DURATION;
 
-      // Which segment are we on?
-      let seg = 0;
-      while (seg < TIMED.length - 1 && t >= TIMED[seg].end) seg += 1;
-      const { start, end } = TIMED[seg];
-      const s = SEGMENTS[seg];
-      const p = clamp01((t - start) / (end - start));
-
-      // Position along the arc, plus a gentle buoyant bob and sway.
-      const bob = Math.sin(t / 900) * 0.012;
-      const fx = bezier(p, s.x0, s.cx, s.x1);
-      const fy = bezier(p, s.y0, s.cy, s.y1) + bob;
-      const scale = 0.8 + clamp01((fy - 0.3) / (Y_GROUND - 0.3)) * 0.3; // nearer the ground = closer/bigger
-      const rot = Math.sin(t / 1100) * 2.5;
-
+      // Position along the valley, plus a gentle buoyant bob. No rotation —
+      // each pose glides exactly as the image is drawn.
+      const bob = Math.sin((ts - startTs) / 900) * 0.012;
+      const fx = bezier(p, X_START, CX, X_END);
+      const fy = bezier(p, Y_START, CY, Y_END) + bob;
       sprite.style.transform = `translate3d(${fx * dims.w}px, ${
         fy * dims.h
-      }px, 0) translate(-50%, -50%) rotate(${rot}deg) scale(${scale})`;
+      }px, 0) translate(-50%, -50%)`;
 
-      // Cross-fade poses: each is centred on its own time window, fading in/out
-      // across FADE at the seams so consecutive poses blend instead of popping.
-      TIMED.forEach((win, i) => {
-        const el = poseRefs.current[i];
-        if (!el) return;
-        const rise = smooth(clamp01((t - (win.start - FADE)) / (2 * FADE)));
-        const fall = smooth(clamp01((t - (win.end - FADE)) / (2 * FADE)));
-        el.style.opacity = String(rise * (1 - fall));
-      });
+      // Blend the three poses. r1: down→straight, r2: straight→up. The weights
+      // always sum to ~1 and change gradually, so there is never a hard switch.
+      const r1 = ramp(p, T1);
+      const r2 = ramp(p, T2);
+      if (downRef.current) downRef.current.style.opacity = String(1 - r1);
+      if (straightRef.current) straightRef.current.style.opacity = String(r1 * (1 - r2));
+      if (upRef.current) upRef.current.style.opacity = String(r2);
 
       raf = requestAnimationFrame(frame);
     };
@@ -180,21 +100,23 @@ export function HanumanFlyby() {
     <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
       <div
         ref={spriteRef}
-        className="absolute left-0 top-0 w-[clamp(180px,24vw,360px)] opacity-25 will-change-transform"
+        className="absolute left-0 top-0 w-[clamp(240px,32vw,480px)] opacity-25 will-change-transform"
       >
-        {SEGMENTS.map((seg, i) => (
+        {[
+          { ref: downRef, src: POSE_DOWN },
+          { ref: straightRef, src: POSE_STRAIGHT },
+          { ref: upRef, src: POSE_UP },
+        ].map(({ ref, src }) => (
           <div
-            key={seg.src}
-            ref={(el) => {
-              poseRefs.current[i] = el;
-            }}
+            key={src}
+            ref={ref}
             className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 opacity-0 will-change-[opacity]"
           >
             <Image
-              src={seg.src}
+              src={src}
               alt=""
-              width={1024}
-              height={1536}
+              width={1200}
+              height={1200}
               quality={50}
               sizes="(max-width: 768px) 24vw, 360px"
               className="h-auto w-full"

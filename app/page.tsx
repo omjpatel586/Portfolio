@@ -1,4 +1,4 @@
-"use client";
+import { ABOUT_ME_DESCRIPTION, buildMetadata } from "@/app/utils/metadata";
 import { About } from "@/components/About";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
@@ -7,6 +7,15 @@ import { Project } from "@/components/Project";
 import { SectionBreak } from "@/components/SectionBreak";
 import { Skills } from "@/components/Skills";
 import { Testimonials } from "@/components/Testimonials";
+import { CONTACT_INFO } from "@/data/contact-info";
+
+export const metadata = buildMetadata({
+  title: `${CONTACT_INFO.name} | ${CONTACT_INFO.role}`,
+  absoluteTitle: true,
+  description: ABOUT_ME_DESCRIPTION,
+  path: "/",
+  ogType: "profile",
+});
 
 export default function HomePage() {
   return (

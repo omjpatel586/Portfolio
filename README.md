@@ -4,7 +4,7 @@ Personal portfolio of **Om J Patel**, Backend & DevOps Engineer.
 
 **Live site:** [www.omjpatel.dev](https://www.omjpatel.dev)
 
-A single-page portfolio with a night-sky hero, an animated Hanuman flyby rendered with pose-based sprite animation, an auto-sliding testimonials carousel, and dedicated routes for projects, experience, education, and contact.
+A multiple-page portfolio with a night-sky hero, an animated Hanuman flyby rendered with pose-based sprite animation, an auto-sliding testimonials carousel, and dedicated routes for projects, experience, education, and contact.
 
 ## Tech Stack
 
