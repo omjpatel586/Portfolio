@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { NightSky } from "@/components/NightSky";
 import { CONTACT_INFO } from "@/data/contact-info";
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -64,6 +65,8 @@ export const viewport: Viewport = {
   themeColor: "#f47c20",
 };
 
+const GA_MEASUREMENT_ID = "G-HBJ9SE8Z22";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +79,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
         />
+        {/* Google tag (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </head>
       <body className="relative min-h-screen bg-ink text-brand-light antialiased">
         {/* Site-wide night background, fixed behind all content */}
