@@ -1,27 +1,63 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { CONTACT_INFO } from "@/data/contact-info";
 import { Icon } from "@/components/Icon";
+import { CONTACT_INFO } from "@/data/contact-info";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
-  { label: "Self Projects", href: "/self-projects" },
-  { label: "Industry Projects", href: "/industry-projects" },
   { label: "Education", href: "/education" },
   { label: "Experience", href: "/experience" },
   { label: "Contact", href: "/contact" },
 ];
 
+type ProjectLink = { href: string; label: string };
+type ProjectGroup = { label: string; links: ProjectLink[] };
+
+const projectGroups: ProjectGroup[] = [
+  {
+    label: "Industry",
+    links: [
+      { href: "/projects/industry/asupxsuite", label: "Asupxsuite" },
+      // { href: "/projects/industry/boultbox", label: "BoultBox" },
+      // { href: "/projects/industry/quickmed", label: "QuickMed" },
+      { href: "/industry-projects", label: "BoultBox" },
+      { href: "/industry-projects", label: "QuickMed" },
+    ],
+  },
+  {
+    label: "Self",
+    links: [
+      // { href: "/projects/self/invoicely", label: "Invoicely" },
+      // {
+      //   href: "/projects/self/hospital-management-landing",
+      //   label: "Hospital management landing page",
+      // },
+      // { href: "/projects/self/blogs-management-platform", label: "Blogs management platform" },
+      // { href: "/projects/self/novira", label: "Novira" },
+      { href: "/self-projects", label: "Invoicely" },
+      {
+        href: "/self-projects",
+        label: "Hospital management landing page",
+      },
+      { href: "/self-projects", label: "Blogs management platform" },
+      { href: "/self-projects", label: "Novira" },
+    ],
+  },
+];
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
+
+  const navRef = useRef<HTMLElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
-      setMenuOpen(false);
       setSticky(window.scrollY > 24);
     };
 
@@ -31,10 +67,48 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const { body } = document;
+    const previous = {
+      bodyOverflow: body.style.overflow,
+      bodyOverscroll: body.style.overscrollBehavior,
+      bodyTouchAction: body.style.touchAction,
+    };
+
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "contain";
+    body.style.touchAction = "none";
+
+    return () => {
+      body.style.overflow = previous.bodyOverflow;
+      body.style.overscrollBehavior = previous.bodyOverscroll;
+      body.style.touchAction = previous.bodyTouchAction;
+    };
+  }, [menuOpen]);
+
+  // Close only on an actual outside click/tap — not on scroll.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (navRef.current?.contains(target)) return;
+      if (toggleButtonRef.current?.contains(target)) return;
+
+      setMenuOpen(false);
+      setProjectsOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [menuOpen]);
+
   return (
     <header
       className={[
-        "sticky top-0 z-60 border-b transition-all duration-200",
+        "sticky top-0 z-60 border-b pt-[env(safe-area-inset-top)] transition-all duration-200",
         sticky ? "border-brand bg-black/80 backdrop-blur-md" : "border-transparent bg-transparent",
       ].join(" ")}
     >
@@ -44,6 +118,7 @@ export function Header() {
         </Link>
 
         <nav
+          ref={navRef}
           className={[
             "items-center gap-5 text-sm text-brand-light/80 md:flex",
             menuOpen
@@ -51,7 +126,116 @@ export function Header() {
               : "hidden md:flex",
           ].join(" ")}
         >
-          {navLinks.map((link) => (
+          {navLinks.slice(0, 2).map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hover:text-brand"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          {/* Projects — desktop hover mega menu + mobile click accordion */}
+          <div
+            className="w-full md:relative md:w-auto"
+            onMouseEnter={() => setProjectsOpen(true)}
+            onMouseLeave={() => setProjectsOpen(false)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+                setProjectsOpen(false);
+              }
+            }}
+          >
+            <button
+              type="button"
+              className="inline-flex w-full cursor-pointer items-center justify-between gap-1 py-2 hover:text-brand md:w-auto md:justify-start md:py-0"
+              onClick={() => setProjectsOpen((value) => !value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setProjectsOpen(false);
+              }}
+              aria-expanded={projectsOpen}
+              aria-haspopup="menu"
+            >
+              <span>Projects</span>
+              <svg
+                viewBox="0 0 512 512"
+                className={[
+                  "size-3.5 fill-current transition-transform duration-200 md:hidden",
+                  projectsOpen ? "rotate-180" : "rotate-0",
+                ].join(" ")}
+              >
+                <path d="M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L256 349.1 80.9 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z" />
+              </svg>
+            </button>
+
+            {/* Mobile: inline accordion, no separate card/border, pushes items below it down */}
+            <div
+              className={[
+                "grid overflow-hidden transition-all duration-200 md:hidden",
+                projectsOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+              ].join(" ")}
+              role="menu"
+            >
+              <div className="flex min-h-0 flex-col gap-4 py-2 pl-3">
+                {projectGroups.map((group) => (
+                  <div key={group.label} className="flex flex-col gap-1">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-white/40">
+                      {group.label}
+                    </span>
+                    {group.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="cursor-pointer rounded-lg py-2 pl-2 hover:bg-brand/10 hover:text-brand"
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setProjectsOpen(false);
+                        }}
+                        role="menuitem"
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: absolutely positioned mega menu, hover-triggered */}
+            <div
+              className={[
+                "absolute left-0 top-[calc(100%+1px)] hidden min-w-max gap-6 rounded-xl border border-brand bg-black/95 p-4 pt-6 shadow-lg md:flex-row",
+                projectsOpen ? "md:flex" : "md:hidden",
+              ].join(" ")}
+              role="menu"
+            >
+              {projectGroups.map((group) => (
+                <div key={group.label} className="flex min-w-32 flex-col gap-1">
+                  <span className="px-3 text-xs font-semibold uppercase tracking-wide text-white/40">
+                    {group.label}
+                  </span>
+                  {group.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="cursor-pointer rounded-lg px-3 py-2 hover:bg-brand/10 hover:text-brand"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setProjectsOpen(false);
+                      }}
+                      role="menuitem"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {navLinks.slice(2).map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -64,6 +248,7 @@ export function Header() {
         </nav>
 
         <button
+          ref={toggleButtonRef}
           type="button"
           className="inline-flex rounded-full border border-brand bg-brand/10 px-4 py-2 text-brand-light md:hidden"
           onClick={() => setMenuOpen((value) => !value)}

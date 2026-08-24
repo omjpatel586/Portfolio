@@ -1,5 +1,6 @@
 import { industrialProjects, selfProjects } from "@/data/projects";
 import Image from "next/image";
+import Link from "next/link";
 
 type ProjectProps = {
   mode: "self" | "industry";
@@ -121,6 +122,14 @@ export function Project({ mode, standalone = false }: ProjectProps) {
                 >
                   View Project
                 </a>
+                {mode === "industry" && project.name === "ASUP Records" && (
+                  <Link
+                    href="/projects/industry/asupxsuite"
+                    className="inline-flex min-h-12 w-fit items-center justify-center rounded-full border border-brand px-5 text-sm font-medium text-brand-light transition hover:-translate-y-0.5 hover:bg-brand/10"
+                  >
+                    Read case study
+                  </Link>
+                )}
               </div>
             </article>
           ))}

@@ -35,7 +35,7 @@ const config: Config = {
       },
       animation: {
         gada: "gadaSpin 2.6s linear infinite",
-        "cloud-drift": "cloudDrift 30s ease-in-out infinite alternate",
+        "cloud-drift": "cloudDrift 24s ease-in-out infinite alternate",
         "testimonial-in": "testimonialIn 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },

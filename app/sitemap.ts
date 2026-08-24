@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/#about", changeFrequency: "yearly", priority: 1 },
     { path: "/self-projects", changeFrequency: "monthly", priority: 0.8 },
     { path: "/industry-projects", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/projects/industry/asupxsuite", changeFrequency: "monthly", priority: 0.8 },
     { path: "/experience", changeFrequency: "monthly", priority: 0.7 },
     { path: "/education", changeFrequency: "yearly", priority: 0.5 },
     { path: "/contact", changeFrequency: "yearly", priority: 0.6 },
