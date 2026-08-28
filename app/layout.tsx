@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   keywords: BASE_KEYWORDS,
   authors: [{ name: CONTACT_INFO.name, url: CONTACT_INFO.socialMedia.linkedin }],
   creator: CONTACT_INFO.name,
+  other: {
+    "google-adsense-account": "ca-pub-1665533093238512",
+  },
 };
 
 const PERSON_SCHEMA = {
