@@ -48,9 +48,15 @@ const projectGroups: ProjectGroup[] = [
   },
 ];
 
+const legalLinks: ProjectLink[] = [
+  { href: "/legal/privacy-policy", label: "Privacy Policy" },
+  { href: "/legal/terms-of-service", label: "Terms of Service" },
+];
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
+  const [legalOpen, setLegalOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
 
   const navRef = useRef<HTMLElement>(null);
@@ -99,6 +105,7 @@ export function Header() {
 
       setMenuOpen(false);
       setProjectsOpen(false);
+      setLegalOpen(false);
     };
 
     document.addEventListener("pointerdown", onPointerDown);
@@ -186,7 +193,7 @@ export function Header() {
                     </span>
                     {group.links.map((link) => (
                       <Link
-                        key={link.href}
+                        key={`${group.label}-${link.label}`}
                         href={link.href}
                         className="cursor-pointer rounded-lg py-2 pl-2 hover:bg-brand/10 hover:text-brand"
                         onClick={() => {
@@ -206,7 +213,7 @@ export function Header() {
             {/* Desktop: absolutely positioned mega menu, hover-triggered */}
             <div
               className={[
-                "absolute left-0 top-[calc(100%+1px)] hidden min-w-max gap-6 rounded-xl border border-brand bg-black/95 p-4 pt-6 shadow-lg md:flex-row",
+                "absolute left-0 top-[calc(100%+1px)] hidden max-w-[calc(100vw-2rem)] flex-wrap gap-4 rounded-xl border border-brand bg-black/95 p-4 pt-6 shadow-lg md:flex-row",
                 projectsOpen ? "md:flex" : "md:hidden",
               ].join(" ")}
               role="menu"
@@ -218,9 +225,9 @@ export function Header() {
                   </span>
                   {group.links.map((link) => (
                     <Link
-                      key={link.href}
+                      key={`${group.label}-${link.label}`}
                       href={link.href}
-                      className="cursor-pointer rounded-lg px-3 py-2 hover:bg-brand/10 hover:text-brand"
+                      className="cursor-pointer rounded-lg px-3 py-2 whitespace-normal hover:bg-brand/10 hover:text-brand"
                       onClick={() => {
                         setMenuOpen(false);
                         setProjectsOpen(false);
@@ -235,12 +242,77 @@ export function Header() {
             </div>
           </div>
 
+          {/* Legal — desktop hover menu + mobile click accordion */}
+          <div
+            className="w-full md:relative md:w-auto"
+            onMouseEnter={() => setLegalOpen(true)}
+            onMouseLeave={() => setLegalOpen(false)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget as Node)) setLegalOpen(false);
+            }}
+          >
+            <button
+              type="button"
+              className="inline-flex w-full cursor-pointer items-center justify-between gap-1 py-2 hover:text-brand md:w-auto md:justify-start md:py-0"
+              onClick={() => setLegalOpen((value) => !value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setLegalOpen(false);
+              }}
+              aria-expanded={legalOpen}
+              aria-haspopup="menu"
+            >
+              <span>Legal</span>
+              <svg viewBox="0 0 512 512" className={["size-3.5 fill-current transition-transform duration-200 md:hidden", legalOpen ? "rotate-180" : "rotate-0"].join(" ")}>
+                <path d="M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L256 349.1 80.9 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z" />
+              </svg>
+            </button>
+
+            <div className={["grid overflow-hidden transition-all duration-200 md:hidden", legalOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"].join(" ")} role="menu">
+              <div className="flex min-h-0 flex-col gap-1 py-2 pl-3">
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="cursor-pointer rounded-lg py-2 pl-2 hover:bg-brand/10 hover:text-brand"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setLegalOpen(false);
+                    }}
+                    role="menuitem"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className={["absolute left-0 top-[calc(100%+1px)] hidden w-max max-w-[calc(100vw-2rem)] flex-wrap gap-1 rounded-xl border border-brand bg-black/95 p-3 shadow-lg md:flex-row", legalOpen ? "md:flex" : "md:hidden"].join(" ")} role="menu">
+              {legalLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-lg px-3 py-2 whitespace-normal hover:bg-brand/10 hover:text-brand"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setLegalOpen(false);
+                  }}
+                  role="menuitem"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {navLinks.slice(2).map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className="hover:text-brand"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                setLegalOpen(false);
+              }}
             >
               {link.label}
             </Link>

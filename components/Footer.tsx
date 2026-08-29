@@ -11,6 +11,8 @@ export function Footer() {
         <div className="flex flex-wrap gap-4">
           <Link href="/">Home</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/legal/privacy-policy">Privacy Policy</Link>
+          <Link href="/legal/terms-of-service">Terms of Service</Link>
           <a href={CONTACT_INFO.socialMedia.github} target="_blank" rel="noreferrer">
             GitHub
           </a>
