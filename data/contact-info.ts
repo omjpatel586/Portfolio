@@ -1,12 +1,12 @@
 export const CONTACT_INFO = {
   name: "Om J Patel",
-  role: "Backend & DevOps Engineer",
+  role: "Backend & DevOps Engineer | AI Engineer",
   siteUrl: "https://www.omjpatel.dev",
   email: "connect@omjpatel.dev",
   phone: "+91 635-496-6637",
   location: "Surat, India",
   address: "Abhishek Residency 01, Sudama Chowk, Mota Varachha, Surat, Gujarat, India",
-  resumeUrl: "/images/home/OM J PATEL Backend Engineer Resume.pdf",
+  resumeUrl: "/images/home/OM J PATEL Backend with AI Engineer Resume.pdf",
   socialMedia: {
     github: "https://github.com/omjpatel586",
     linkedin: "https://linkedin.com/in/om-j-patel",
