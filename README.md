@@ -67,6 +67,23 @@ public/         images, resume PDF, favicon
 
 Path alias: `@/*` maps to the repo root (e.g. `@/components/...`, `@/data/...`).
 
+## Contributing
+
+This portfolio is continuously evolving.
+
+This is an Open-Source repository, and contributions are always welcome! If you find an issue, please create a new issue under the "Issues" section. To contribute code, fork the repository and submit a pull request. Your contributions will help make this a valuable resource for the community!
+
+Fork the repository
+Create a new branch: git checkout -b feature/my-feature
+Make your changes
+Commit your changes: git commit -am 'Add new feature'
+Push to the branch: git push origin feature/my-feature
+Open a Pull Request
+
 ## License
 
 Content and design © Om J Patel. Icon shapes are from [Font Awesome Free](https://fontawesome.com/license/free) (CC BY 4.0), self-hosted as inline SVG.
+
+## 🤝 Let's Connect
+
+[![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/om-j-patel/)
