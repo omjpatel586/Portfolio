@@ -28,8 +28,10 @@ export function About() {
               </p>
               <div className="mt-6 grid gap-4 md:grid-cols-3">
                 <div className="rounded-2xl border border-brand bg-brand/10 p-4">
-                  <strong className="block text-2xl text-brand">3</strong>
-                  <span className="text-sm text-brand-light/75">Years Of Experience</span>
+                  <strong className="block text-2xl text-brand">3+</strong>
+                  <span className="text-sm text-brand-light/75">
+                    Years of Professional Experience
+                  </span>
                 </div>
                 <div className="rounded-2xl border border-brand bg-brand/10 p-4">
                   <strong className="block text-2xl text-brand">5+</strong>
