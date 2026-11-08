@@ -373,56 +373,6 @@ export default function AsupxSuiteCaseStudyPage() {
           </ul>
         </section>
 
-        <section className="border-t border-brand/60 py-20" aria-labelledby="tenancy-heading">
-          <SectionHeading
-            eyebrow="04 / White-label architecture"
-            title="A platform designed to let tenants run their own brand"
-          >
-            <p id="tenancy-heading">
-              ASUPX Suite is designed so multiple white-label tenants and distributors can operate
-              within the platform. Each tenant can configure its business presence while working
-              from the shared backend foundation.
-            </p>
-          </SectionHeading>
-          <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
-            <div className="rounded-3xl border border-brand bg-gradient-to-b from-brand/15 to-surface p-6">
-              <p className="text-xs uppercase tracking-eyebrow text-brand-soft">
-                Tenant-level configuration
-              </p>
-              <ul className="mt-5 grid gap-3 text-brand-light/85">
-                {[
-                  "Branding",
-                  "Plans and pricing",
-                  "Razorpay or Stripe account connection",
-                  "Business details",
-                ].map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <Icon name="check" className="mt-1 text-brand" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-3xl border border-brand bg-black/40 p-6">
-              <p className="mb-4 text-center text-sm font-semibold text-brand">
-                ASUPX Suite platform
-              </p>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {["Tenant A", "Tenant B", "Tenant C"].map((tenant) => (
-                  <div key={tenant} className="rounded-2xl border border-brand bg-brand/8 p-4">
-                    <h3 className="font-medium text-brand-light">{tenant}</h3>
-                    <ul className="mt-3 grid gap-1 text-xs leading-5 text-brand-light/75">
-                      <li>Branding</li>
-                      <li>Pricing</li>
-                      <li>Payment configuration</li>
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="border-t border-brand/60 py-20" aria-labelledby="data-heading">
           <SectionHeading
             eyebrow="05 / MongoDB data architecture"
@@ -479,9 +429,9 @@ export default function AsupxSuiteCaseStudyPage() {
           >
             <p id="distribution-heading">
               Artists and labels can prepare audio releases in the platform. After administrative
-              review, approved releases can move into delivery workflows for distributors such as
-              RouteNote and State51, and onward to digital music services. The same platform context
-              supports catalog relationships, royalty tracking, finance, and reporting workflows.
+              review, approved releases can move into delivery workflows for streaming platforms.
+              The same platform context supports catalog relationships, royalty tracking, finance,
+              and reporting workflows.
             </p>
           </SectionHeading>
           <Flow
@@ -595,36 +545,6 @@ export default function AsupxSuiteCaseStudyPage() {
             ))}
           </div>
         </section>
-
-        <section className="border-t border-brand/60 py-20" aria-labelledby="stack-heading">
-          <SectionHeading
-            eyebrow="10 / Technology stack"
-            title="Tools chosen for the platform foundation"
-          >
-            <p id="stack-heading">
-              The V2 stack pairs a modular Node.js backend with an Nx monorepo, MongoDB, and
-              practical deployment and integration tooling.
-            </p>
-          </SectionHeading>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {asupxSuite.technologyStack.groups.map((group) => (
-              <section
-                key={group.title}
-                className="rounded-2xl border border-brand bg-surface/85 p-5"
-              >
-                <h3 className="text-sm uppercase tracking-[0.14em] text-brand-soft">
-                  {group.title}
-                </h3>
-                <ul className="mt-4 grid gap-2 text-sm text-brand-light/85">
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
-        </section>
-
         <section
           className="rounded-[2rem] border border-brand bg-gradient-to-br from-brand/18 to-surface p-7 text-center sm:p-12"
           aria-labelledby="cta-heading"
