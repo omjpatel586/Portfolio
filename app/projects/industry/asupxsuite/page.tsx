@@ -422,42 +422,9 @@ export default function AsupxSuiteCaseStudyPage() {
           </div>
         </section>
 
-        <section className="border-t border-brand/60 py-20" aria-labelledby="distribution-heading">
-          <SectionHeading
-            eyebrow="06 / Distribution and royalties"
-            title="From release review to delivery and royalty context"
-          >
-            <p id="distribution-heading">
-              Artists and labels can prepare audio releases in the platform. After administrative
-              review, approved releases can move into delivery workflows for streaming platforms.
-              The same platform context supports catalog relationships, royalty tracking, finance,
-              and reporting workflows.
-            </p>
-          </SectionHeading>
-          <Flow
-            steps={[
-              "Artist / label",
-              "Audio release",
-              "Admin review",
-              "Distributor delivery",
-              "DSP ecosystem",
-            ]}
-          />
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {["Spotify", "Apple Music", "YouTube Music"].map((service) => (
-              <div
-                key={service}
-                className="rounded-2xl border border-brand bg-brand/8 p-5 text-center font-semibold text-brand-light"
-              >
-                {service}
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section className="border-t border-brand/60 py-20" aria-labelledby="payments-heading">
           <SectionHeading
-            eyebrow="07 / Payments and APIs"
+            eyebrow="06 / Payments and APIs"
             title="Tenant-configured payment flows and RESTful platform APIs"
           >
             <p id="payments-heading">
@@ -502,7 +469,7 @@ export default function AsupxSuiteCaseStudyPage() {
 
         <section className="border-t border-brand/60 py-20" aria-labelledby="deployment-heading">
           <SectionHeading
-            eyebrow="08 / Infrastructure and deployment"
+            eyebrow="07 / Infrastructure and deployment"
             title="A deployable backend foundation"
           >
             <p id="deployment-heading">
@@ -516,7 +483,7 @@ export default function AsupxSuiteCaseStudyPage() {
 
         <section className="border-t border-brand/60 py-20" aria-labelledby="contribution-heading">
           <SectionHeading
-            eyebrow="09 / My role and contribution"
+            eyebrow="08 / My role and contribution"
             title="Backend architecture for ASUPX Suite V2"
           >
             <p id="contribution-heading">
